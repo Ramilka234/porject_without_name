@@ -7,7 +7,7 @@ from .models import Category, Review, Game
 
 class GameAdminForm(forms.ModelForm):
     """Форма с виджетом ckeditor"""
-    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+    content = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Game
@@ -47,10 +47,13 @@ class MovieAdmin(admin.ModelAdmin):
             "fields": (("title"),)
         }),
         (None, {
-            "fields": ("description", ("picture", "get_image"))
+            "fields": ("content", ("picture", "get_image"))
         }),
         (None, {
-            "fields": (("year"),)
+            "fields": (("year",  'country'),)
+        }),
+        (None, {
+            "fields": (('cat_id'),)
         }),
         ("Options", {
             "fields": (("draft"),)

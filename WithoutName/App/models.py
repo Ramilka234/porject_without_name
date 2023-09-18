@@ -20,8 +20,8 @@ class Game(models.Model):
     def __str__(self):
         return self.title
 
-    def get_review(self):
-        return self.reviews_set.filter(parent__isnull=True)
+    def get_reviews(self):
+        return self.reviews.filter(parent__isnull=True)
 class Review(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=100)

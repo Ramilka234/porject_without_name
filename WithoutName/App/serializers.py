@@ -49,3 +49,24 @@ class GameDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         exclude = ('draft',)
+
+
+class GameCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = '__all__'
+
+
+class GameEditOrDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = '__all__'
+
+    def destroy(self, instance):
+        instance.delete()
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
